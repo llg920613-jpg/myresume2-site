@@ -111,3 +111,22 @@ linkedPerformanceCards.forEach((card) => {
     }
   });
 });
+
+const finderCategories = document.querySelectorAll("[data-finder-target]");
+const finderPanels = document.querySelectorAll("[data-finder-panel]");
+
+finderCategories.forEach((category) => {
+  category.addEventListener("click", () => {
+    const target = category.dataset.finderTarget;
+
+    finderCategories.forEach((otherCategory) => {
+      const isActive = otherCategory === category;
+      otherCategory.classList.toggle("is-active", isActive);
+      otherCategory.setAttribute("aria-selected", String(isActive));
+    });
+
+    finderPanels.forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.finderPanel === target);
+    });
+  });
+});
